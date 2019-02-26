@@ -1,0 +1,4 @@
+*.IDEA/
+*.png
+tcn-keras-try.py
+testing_info.pkl
