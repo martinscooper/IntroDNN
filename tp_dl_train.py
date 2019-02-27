@@ -7,47 +7,44 @@ test_all y test se encargan de testear todos los modelos y mostrar el mse
 
 '''
 
-from pandas import concat
 import pandas as pd
 import matplotlib.pyplot as plt
 from sklearn.model_selection import train_test_split
 from keras.layers import Conv1D, LSTM, Dropout, Dense, Flatten, BatchNormalization, Activation, Input
 from sklearn.preprocessing import StandardScaler
-from sklearn.dummy import DummyRegressor
 from sklearn.metrics import mean_squared_error
-from keras.models import Sequential, Model
+from keras.models import Sequential
 import numpy as np
 import pickle
 from tcn import compiled_tcn
 
+pd.options.mode.chained_assignment = None
 
 def get_architecture(n):
     model = Sequential()
     input_shape = (time_lags[n], number_of_features)
     if n == 1:
-        model.add(LSTM(32, input_shape=input_shape, return_sequences=False))
-        model.add(Dropout(.4))
-        model.add(Dense(16))
-        model.add(Activation('relu'))
-        model.add(Dropout(.2))
-        model.add(Dense(8))
-        model.add(Activation('relu'))
+        input_shape = input_shape
+        model.add(LSTM(16, input_shape=input_shape, return_sequences=False))
+        model.add(Dropout(.8))
         model.add(Dense(1, activation='linear'))
-
+        model.compile(loss='mse',
+                      optimizer='adam',
+                      )
     elif n == 2:
         model.add(LSTM(64, input_shape=input_shape, return_sequences=True))
         model.add(Dropout(.3))
         model.add(LSTM(32, input_shape=input_shape, return_sequences=False))
         model.add(Dropout(.6))
         model.add(Dense(1, activation='linear'))
-
+        model.compile(loss='mse',
+                      optimizer='adam',
+                      )
     elif n == 3:
         model.add(LSTM(128, input_shape=input_shape, return_sequences=True))
-        model.add(Dropout(.8))
         model.add(LSTM(64, input_shape=input_shape, return_sequences=True))
-        model.add(Dropout(.8))
         model.add(LSTM(32, input_shape=input_shape, return_sequences=False))
-        model.add(Dropout(.8))
+        model.add(Dropout(.6))
         model.add(Dense(32))
         model.add(Activation('relu'))
         model.add(Dropout(.4))
@@ -57,34 +54,27 @@ def get_architecture(n):
         model.add(Dense(8))
         model.add(Activation('relu'))
         model.add(Dense(1, activation='linear'))
-
+        model.compile(loss='mse',
+                      optimizer='adam',
+                      )
     elif n == 4:
         model = compiled_tcn(return_sequences=False,
                              num_feat=number_of_features,
                              num_classes=0,
-                             nb_filters=64,
-                             kernel_size=4,
-                             dilations=[2 ** i for i in range(2, 5)],
-                             nb_stacks=2,
+                             nb_filters=8,
+                             kernel_size=2,
+                             dilations=[1, 2, 4],
+                             # dilations=[2 ** i for i in range(2, 5)],
+                             nb_stacks=1,
                              max_len=time_lags[n],
-                             activation='norm_relu',
                              use_skip_connections=True,
                              regression=True,
-                             dropout_rate=0)
+                             dropout_rate=0.2)
     elif n == 5:
         model = Sequential()
-        model.add(Conv1D(64, 6, activation='relu', padding='causal', input_shape=(time_lags[n], number_of_features)))
-        model.add(Conv1D(128, 12, activation='relu', padding='causal'))
+        model.add(Conv1D(32, 2, activation='relu', padding='causal', input_shape=input_shape))
         model.add(Dropout(0.5))
         model.add(Flatten())
-        model.add(Dense(256, activation='relu'))
-        model.add(BatchNormalization())
-        model.add(Dense(128, activation='relu'))
-        model.add(BatchNormalization())
-        model.add(Dense(64, activation='relu'))
-        model.add(BatchNormalization())
-        model.add(Dense(32, activation='relu'))
-        model.add(BatchNormalization())
         model.add(Dense(1, activation='linear'))
         model.compile(loss='mse',
                       optimizer='adam',
@@ -95,9 +85,9 @@ def get_architecture(n):
         model.add(Dense(32, kernel_initializer='normal', activation='relu'))
         model.add(Dropout(.2))
         model.add(Dense(1, kernel_initializer='normal'))
-    model.compile(loss='mse',
-                  optimizer='adam',
-                  )
+        model.compile(loss='mse',
+                      optimizer='adam',
+                      )
     print(model.summary())
     return model
 
@@ -137,7 +127,7 @@ def series_to_supervised(df2, dropnan=True, number_of_lags=None):
     names += [('{0}(t)'.format(columns[j])) for j in range(n_vars)]
 
     # put it all together
-    agg = concat(cols, axis=1)
+    agg = pd.concat(cols, axis=1)
     agg.columns = names
     # drop rows with NaN values
     if dropnan:
@@ -146,21 +136,23 @@ def series_to_supervised(df2, dropnan=True, number_of_lags=None):
 
 
 def train_all(print_images=False):
-    numeric_cols = ['stationaryLevel', 'walkingLevel', 'runningLevel',
-                    'numberOfConversations', 'wifiChanges',
-                    'silenceLevel', 'voiceLevel', 'noiseLevel',
-                    'hourSine', 'hourCosine',
-                    'remainingminutes', 'pastminutes',
-                    'distanceTraveled', 'locationVariance']
 
     ss = StandardScaler()
     for i in users:
         print('Comienzan los entrenamientos con el usuario {0}'.format(i))
         userdata = get_user_data(df, i)
-        userdata.loc[:, numeric_cols] = ss.fit_transform(userdata[numeric_cols])
-        cache[i] = {}
+        train_cache[i] = {}
+        test_cache[i] = {}
+        models[i] = {}
         lags = -1
         for j in range(1, number_of_architectures + 1):
+
+            to_standarize = []
+
+            for col in numeric_cols:
+                for lag in range(1, time_lags[j] + 1):
+                    to_standarize.append(col + '(t-{0})'.format(lag))
+
             print('El entrenamiendo del usuario {0} con la aquitectura {1} está por comenzar'.format(i, j))
             if lags != time_lags[j]:
                 data = series_to_supervised(userdata, number_of_lags=time_lags[j])
@@ -171,18 +163,21 @@ def train_all(print_images=False):
             y = data.iloc[:, -1]
 
             x_train, x_test, y_train, y_test = train_test_split(x, y, shuffle=False, train_size=0.67)
-            x_train, y_train, x_test, y_test = x_train.values.astype("float32"), y_train.values.astype("float32"),\
+            x_train.loc[:, to_standarize] = ss.fit_transform(x_train[to_standarize])
+            x_test.loc[:, to_standarize] = ss.transform(x_test[to_standarize])
+            x_train, y_train, x_test, y_test = x_train.values.astype("float32"), y_train.values.astype("float32"), \
                                                x_test.values.astype("float32"), y_test.values.astype("float32")
 
-            if time_lags[j]>1:
+            if time_lags[j] > 1:
                 x_train = x_train.reshape(x_train.shape[0], time_lags[j], number_of_features)
                 x_test = x_test.reshape(x_test.shape[0], time_lags[j], number_of_features)
             print('{0} casos de entrenamiento. **** {1} casos para testeo.'.format(x_train.shape[0], x_test.shape[0]))
-            history = model.fit(x_train, y_train, epochs=64, batch_size=batch_size[j], validation_data=(x_test, y_test),
+            history = model.fit(x_train, y_train, epochs=epochs[j], batch_size=batch_size[j], validation_data=(x_test, y_test),
                                 verbose=0)
 
-            cache[i][j] = {'x_test': x_test, 'y_test': y_test, 'x_train': x_train, 'y_train': y_train,
-                           'model': model, 'history': history}
+            test_cache[i][j] = {'x_test': x_test, 'y_test': y_test}
+            train_cache[i][j] = {'x_train': x_train, 'y_train': y_train}
+            models[i][j] = {'model': model, 'history': history}
 
             if print_images:
                 show_images(i, j)
@@ -190,38 +185,13 @@ def train_all(print_images=False):
             print('El entrenamiendo del usuario {0} con la aquitectura {1} ha finalizado'.format(i, j))
 
 
-def test_error(user, architecture):
-    info = cache[user][architecture]
-    x_test, y_test, model = info['x_test'], info['y_test'], info['model']
-    y_pred = model.predict(x_test)
-    return round(mean_squared_error(y_test, y_pred), 3)
-
-
-def train_error(user, architecture):
-    info = cache[user][architecture]
-    x_train, y_train, model = info['x_train'], info['y_train'], info['model']
-    y_pred = model.predict(x_train)
-    return round(mean_squared_error(y_train, y_pred), 3)
-
-
-def test_all():
-    print('')
-    print('*' * 16)
-    for i in users:
-        for j in range(number_of_architectures):
-            mse = test_error(i, j + 1)
-            print('El mse para el usuario {0} utilizando la arquitectura {1} fue: {2}'.format(i, j + 1, mse))
-
-    print('*' * 16)
-    print('')
-
-
 def show_train_prediction(user, architecture):
-    info = cache[user][architecture]
+    info = train_cache[user][architecture]
+    model = models[user][architecture]['model']
     plt.close()
     plt.figure(figsize=(15, 4))
     plt.title('Train data of user {0} with architecture {1}'.format(user, architecture))
-    y_pred = info['model'].predict(info['x_train'])
+    y_pred = model.predict(info['x_train'])
     plt.plot(info['y_train'], label='Train')
     plt.plot(y_pred, label='Predicted')
     plt.axhline(y=1.5, color='r', linestyle=':', )
@@ -230,11 +200,12 @@ def show_train_prediction(user, architecture):
 
 
 def show_test_prediction(user, architecture):
-    info = cache[user][architecture]
+    info = test_cache[user][architecture]
+    model = models[user][architecture]['model']
     plt.close()
     plt.figure(figsize=(15, 4))
     plt.title('Test data of user {0} with architecture {1}'.format(user, architecture))
-    y_pred = info['model'].predict(info['x_test'])
+    y_pred = model.predict(info['x_test'])
     plt.plot(info['y_test'], label='Test')
     plt.plot(y_pred, label='Predicted')
     plt.axhline(y=1.5, color='r', linestyle=':', )
@@ -243,7 +214,7 @@ def show_test_prediction(user, architecture):
 
 
 def show_history_loss(user, architecture):
-    history = cache[user][architecture]['history']
+    history = models[user][architecture]['history']
     plt.close()
     plt.title('Train loss vs. Test loss of user {0} with architecture {1}'.format(user, architecture))
     plt.plot(history.history['loss'], label='train')
@@ -260,15 +231,24 @@ def show_images(user, architecture):
 
 
 df = pd.read_pickle('dataset.pkl')
-
+numeric_cols = ['stationaryLevel', 'walkingLevel', 'runningLevel',
+                'numberOfConversations', 'wifiChanges',
+                'silenceLevel', 'voiceLevel', 'noiseLevel',
+                'hourSine', 'hourCosine',
+                'remainingminutes', 'pastminutes',
+                'distanceTraveled', 'locationVariance']
 number_of_architectures = 6
 users = [50, 31, 4]
-batch_size = {1: 32, 2: 64, 3: 64, 4: 64, 5: 64, 6: 128}
-time_lags = {1: 6, 2: 12, 3: 12, 4: 48, 5: 48, 6 : 1}
+batch_size = {1: 64, 2: 64, 3: 64, 4: 64, 5: 64, 6: 64}
+time_lags = {1: 8, 2: 12, 3: 12, 4: 8, 5: 4, 6: 1}
+epochs = {1: 256, 2: 128, 3: 128, 4: 128, 5: 128, 6: 128}
 number_of_features = df.shape[1]
 
-cache = {}
-train_all(print_images=False)
+train_cache = {}
+test_cache = {}
+models = {}
+train_all(print_images=True)
 
-pickle.dump(cache, open('testing_info.pkl', 'wb'))
-
+pickle.dump(train_cache, open('train_cache.pkl', 'wb'))
+pickle.dump(test_cache, open('test_cache.pkl', 'wb'))
+pickle.dump(models, open('models.pkl', 'wb'))
