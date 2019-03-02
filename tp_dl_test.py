@@ -45,7 +45,9 @@ users = [50, 31, 4]
 number_of_architectures = 6
 
 test_cache = pickle.load(open('test_cache.pkl', 'rb'))
+print(1)
 train_cache = pickle.load(open('train_cache.pkl', 'rb'))
+print(2)
 models = pickle.load(open('models.pkl', 'rb'))
 
 test_all()

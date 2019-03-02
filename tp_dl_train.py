@@ -1,24 +1,21 @@
-'''
-El dataset se encuentra en dataset.pkl
-train_all entrena 3 arquitecturas para 3 usuarios, guarda los modelos entrenados
-y los datos de testeo en un diccionario a modo de cache
+from numpy.random import seed
 
-test_all y test se encargan de testear todos los modelos y mostrar el mse
+seed(1)
+from tensorflow import set_random_seed
 
-'''
-
+set_random_seed(2)
 import pandas as pd
 import matplotlib.pyplot as plt
 from sklearn.model_selection import train_test_split
 from keras.layers import Conv1D, LSTM, Dropout, Dense, Flatten, BatchNormalization, Activation, Input
-from sklearn.preprocessing import StandardScaler
-from sklearn.metrics import mean_squared_error
+from sklearn.preprocessing import StandardScaler, PowerTransformer
 from keras.models import Sequential
 import numpy as np
 import pickle
 from tcn import compiled_tcn
 
 pd.options.mode.chained_assignment = None
+
 
 def get_architecture(n):
     model = Sequential()
@@ -33,7 +30,7 @@ def get_architecture(n):
                       )
     elif n == 2:
         model.add(LSTM(64, input_shape=input_shape, return_sequences=True))
-        model.add(Dropout(.3))
+        model.add(Dropout(.6))
         model.add(LSTM(32, input_shape=input_shape, return_sequences=False))
         model.add(Dropout(.6))
         model.add(Dense(1, activation='linear'))
@@ -61,7 +58,7 @@ def get_architecture(n):
         model = compiled_tcn(return_sequences=False,
                              num_feat=number_of_features,
                              num_classes=0,
-                             nb_filters=8,
+                             nb_filters=6,
                              kernel_size=2,
                              dilations=[1, 2, 4],
                              # dilations=[2 ** i for i in range(2, 5)],
@@ -135,10 +132,11 @@ def series_to_supervised(df2, dropnan=True, number_of_lags=None):
     return agg
 
 
-def train_all(print_images=False):
-
+def train_all():
     ss = StandardScaler()
     for i in users:
+        if i == 50:
+            ss = PowerTransformer()
         print('Comienzan los entrenamientos con el usuario {0}'.format(i))
         userdata = get_user_data(df, i)
         train_cache[i] = {}
@@ -172,63 +170,15 @@ def train_all(print_images=False):
                 x_train = x_train.reshape(x_train.shape[0], time_lags[j], number_of_features)
                 x_test = x_test.reshape(x_test.shape[0], time_lags[j], number_of_features)
             print('{0} casos de entrenamiento. **** {1} casos para testeo.'.format(x_train.shape[0], x_test.shape[0]))
-            history = model.fit(x_train, y_train, epochs=epochs[j], batch_size=batch_size[j], validation_data=(x_test, y_test),
+            history = model.fit(x_train, y_train, epochs=epochs[j], batch_size=batch_size[j],
+                                validation_data=(x_test, y_test),
                                 verbose=0)
 
             test_cache[i][j] = {'x_test': x_test, 'y_test': y_test}
             train_cache[i][j] = {'x_train': x_train, 'y_train': y_train}
             models[i][j] = {'model': model, 'history': history}
 
-            if print_images:
-                show_images(i, j)
-
             print('El entrenamiendo del usuario {0} con la aquitectura {1} ha finalizado'.format(i, j))
-
-
-def show_train_prediction(user, architecture):
-    info = train_cache[user][architecture]
-    model = models[user][architecture]['model']
-    plt.close()
-    plt.figure(figsize=(15, 4))
-    plt.title('Train data of user {0} with architecture {1}'.format(user, architecture))
-    y_pred = model.predict(info['x_train'])
-    plt.plot(info['y_train'], label='Train')
-    plt.plot(y_pred, label='Predicted')
-    plt.axhline(y=1.5, color='r', linestyle=':', )
-    plt.legend(loc='upper right')
-    plt.show()
-
-
-def show_test_prediction(user, architecture):
-    info = test_cache[user][architecture]
-    model = models[user][architecture]['model']
-    plt.close()
-    plt.figure(figsize=(15, 4))
-    plt.title('Test data of user {0} with architecture {1}'.format(user, architecture))
-    y_pred = model.predict(info['x_test'])
-    plt.plot(info['y_test'], label='Test')
-    plt.plot(y_pred, label='Predicted')
-    plt.axhline(y=1.5, color='r', linestyle=':', )
-    plt.legend(loc='upper right')
-    plt.show()
-
-
-def show_history_loss(user, architecture):
-    history = models[user][architecture]['history']
-    plt.close()
-    plt.title('Train loss vs. Test loss of user {0} with architecture {1}'.format(user, architecture))
-    plt.plot(history.history['loss'], label='train')
-    plt.plot(history.history['val_loss'], label='test')
-    plt.legend()
-    plt.show()
-
-
-def show_images(user, architecture):
-    # info = pickle.load(open('testing_info.pkl', 'rb'))
-    show_train_prediction(user, architecture)
-    show_test_prediction(user, architecture)
-    show_history_loss(user, architecture)
-
 
 df = pd.read_pickle('dataset.pkl')
 numeric_cols = ['stationaryLevel', 'walkingLevel', 'runningLevel',
@@ -241,7 +191,7 @@ number_of_architectures = 6
 users = [50, 31, 4]
 batch_size = {1: 64, 2: 64, 3: 64, 4: 64, 5: 64, 6: 64}
 time_lags = {1: 8, 2: 12, 3: 12, 4: 8, 5: 4, 6: 1}
-epochs = {1: 256, 2: 128, 3: 128, 4: 128, 5: 128, 6: 128}
+epochs = {1: 256, 2: 128, 3: 128, 4: 64, 5: 128, 6: 256}
 number_of_features = df.shape[1]
 
 train_cache = {}
