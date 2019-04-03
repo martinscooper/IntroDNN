@@ -199,6 +199,6 @@ test_cache = {}
 models = {}
 train_all(print_images=True)
 
-pickle.dump(train_cache, open('train_cache.pkl', 'wb'))
-pickle.dump(test_cache, open('test_cache.pkl', 'wb'))
-pickle.dump(models, open('models.pkl', 'wb'))
+pickle.dump(train_cache, open('pkl/train_cache.pkl', 'wb'))
+pickle.dump(test_cache, open('pkl/test_cache.pkl', 'wb'))
+pickle.dump(models, open('pkl/models.pkl', 'wb'))

@@ -1,71 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="31c7a908-7dbd-432b-b413-f3f2e83b9162" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Imagenes/user31_arch1__test.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Imagenes/user31_arch1__train.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Imagenes/user31_arch1_loss.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Imagenes/user31_arch2__test.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Imagenes/user31_arch2__train.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Imagenes/user31_arch2_loss.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Imagenes/user31_arch3__test.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Imagenes/user31_arch3__train.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Imagenes/user31_arch3_loss.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Imagenes/user31_arch4__test.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Imagenes/user31_arch4__train.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Imagenes/user31_arch4_loss.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Imagenes/user31_arch5__test.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Imagenes/user31_arch5__train.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Imagenes/user31_arch5_loss.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Imagenes/user31_arch6__test.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Imagenes/user31_arch6__train.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Imagenes/user31_arch6_loss.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Imagenes/user4_arch1__test.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Imagenes/user4_arch1__train.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Imagenes/user4_arch1_loss.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Imagenes/user4_arch2__test.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Imagenes/user4_arch2__train.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Imagenes/user4_arch2_loss.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Imagenes/user4_arch3__test.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Imagenes/user4_arch3__train.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Imagenes/user4_arch3_loss.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Imagenes/user4_arch4__test.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Imagenes/user4_arch4__train.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Imagenes/user4_arch4_loss.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Imagenes/user4_arch5__test.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Imagenes/user4_arch5__train.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Imagenes/user4_arch5_loss.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Imagenes/user4_arch6__test.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Imagenes/user4_arch6__train.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Imagenes/user4_arch6_loss.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Imagenes/user50_arch1__test.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Imagenes/user50_arch1__train.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Imagenes/user50_arch1_loss.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Imagenes/user50_arch2__test.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Imagenes/user50_arch2__train.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Imagenes/user50_arch2_loss.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Imagenes/user50_arch3__test.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Imagenes/user50_arch3__train.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Imagenes/user50_arch3_loss.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Imagenes/user50_arch4__test.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Imagenes/user50_arch4__train.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Imagenes/user50_arch4_loss.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Imagenes/user50_arch5__test.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Imagenes/user50_arch5__train.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Imagenes/user50_arch5_loss.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Imagenes/user50_arch6__test.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Imagenes/user50_arch6__train.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Imagenes/user50_arch6_loss.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dataset.pkl" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/environment.yml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/generate_images.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/models.pkl" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/results.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test_cache.pkl" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/tp_dl_test.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/tp_dl_train.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/train_cache.pkl" beforeDir="false" />
+    <list default="true" id="2a76b6ab-2bd0-4f16-a59b-be37f2724050" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/py/tp_dl_train.py" beforeDir="false" afterPath="$PROJECT_DIR$/py/tp_dl_train.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -74,23 +12,81 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300" />
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/py/seasonality.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="345">
+              <caret line="77" column="11" selection-start-line="77" selection-start-column="11" selection-end-line="77" selection-end-column="11" />
+              <folding>
+                <element signature="e#0#25#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/py/tp_dl_train.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-102">
+              <caret line="19" column="24" selection-start-line="19" selection-start-column="24" selection-end-line="19" selection-end-column="24" />
+              <folding>
+                <element signature="e#544#3405#0" />
+                <element signature="e#641#921#0" />
+                <element signature="e#947#1300#0" />
+                <element signature="e#1326#1987#0" />
+                <element signature="e#2013#2610#0" />
+                <element signature="e#2636#2959#0" />
+                <element signature="e#2985#3361#0" />
+                <element signature="e#3445#3595#0" />
+                <element signature="e#3640#4058#0" />
+                <element signature="e#3772#3975#0" />
+                <element signature="e#4131#4745#0" />
+                <element signature="e#4352#4475#0" />
+                <element signature="e#4769#7077#0" />
+                <element signature="e#4819#7077#0" />
+                <element signature="e#5147#7077#0" />
+                <element signature="e#5220#5328#0" />
+                <element signature="e#6044#6225#0" />
+                <element signature="e#6276#6444#0" />
+                <element signature="e#7129#7445#0" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/py/seasonality.py" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectConfigurationFiles">
+    <option name="files">
+      <list>
+        <option value="$PROJECT_DIR$/.idea/misc.xml" />
+        <option value="$PROJECT_DIR$/.idea/vcs.xml" />
+        <option value="$PROJECT_DIR$/.idea/modules.xml" />
+      </list>
+    </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="-10" />
     <option name="y" value="-10" />
     <option name="width" value="1940" />
-    <option name="height" value="1050" />
+    <option name="height" value="1100" />
   </component>
   <component name="ProjectView">
     <navigator proportions="" version="1">
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -98,15 +94,23 @@
               <item name="IntroDNN" type="b2602c69:ProjectViewProjectNode" />
               <item name="IntroDNN" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="IntroDNN" type="b2602c69:ProjectViewProjectNode" />
+              <item name="IntroDNN" type="462c0819:PsiDirectoryNode" />
+              <item name="py" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.path.for.package.eslint" value="project" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
   </component>
@@ -151,23 +155,24 @@
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="31c7a908-7dbd-432b-b413-f3f2e83b9162" name="Default Changelist" comment="" />
-      <created>1553812063333</created>
+      <changelist id="2a76b6ab-2bd0-4f16-a59b-be37f2724050" name="Default Changelist" comment="" />
+      <created>1554310968644</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1553812063333</updated>
-      <workItem from="1553812065599" duration="609000" />
-      <workItem from="1553871353569" duration="694000" />
+      <updated>1554310968644</updated>
+      <workItem from="1554310974018" duration="656000" />
+      <workItem from="1554322950864" duration="4436000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="1303000" />
+    <option name="totallyTimeSpent" value="5092000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.25268096" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.2533512" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -182,31 +187,56 @@
       <window_info anchor="bottom" id="Database Changes" order="9" />
       <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
       <window_info anchor="bottom" id="Terminal" order="11" />
-      <window_info anchor="bottom" id="Python Console" order="12" visible="true" weight="0.32956153" />
-      <window_info anchor="right" x="0" y="0" width="337" height="638" id="Documentation" side_tool="true" visible="true" weight="0.3297587" />
+      <window_info active="true" anchor="bottom" id="Python Console" order="12" visible="true" weight="0.3281471" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
-      <window_info anchor="right" id="SciView" order="3" />
-      <window_info anchor="right" id="Database" order="4" />
+      <window_info anchor="right" x="0" y="30" width="1536" height="801" id="SciView" order="3" sideWeight="0.49894738" type="WINDOWED" weight="0.3297587" />
+      <window_info anchor="right" x="0" y="0" width="337" height="638" id="Documentation" order="4" sideWeight="0.5010526" side_tool="true" visible="true" weight="0.3297587" />
+      <window_info anchor="right" id="Database" order="5" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/tp_dl_test.py">
+    <entry file="file://$PROJECT_DIR$/py/seasonality.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="374">
-          <caret line="22" column="13" lean-forward="true" selection-start-line="22" selection-start-column="13" selection-end-line="22" selection-end-column="13" />
+        <state relative-caret-position="345">
+          <caret line="77" column="11" selection-start-line="77" selection-start-column="11" selection-end-line="77" selection-end-column="11" />
           <folding>
-            <element signature="e#0#13#0" expanded="true" />
+            <element signature="e#0#25#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/tp_dl_train.py">
-      <provider selected="true" editor-type-id="text-editor" />
+    <entry file="file://$PROJECT_DIR$/py/tp_dl_train.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-102">
+          <caret line="19" column="24" selection-start-line="19" selection-start-column="24" selection-end-line="19" selection-end-column="24" />
+          <folding>
+            <element signature="e#544#3405#0" />
+            <element signature="e#641#921#0" />
+            <element signature="e#947#1300#0" />
+            <element signature="e#1326#1987#0" />
+            <element signature="e#2013#2610#0" />
+            <element signature="e#2636#2959#0" />
+            <element signature="e#2985#3361#0" />
+            <element signature="e#3445#3595#0" />
+            <element signature="e#3640#4058#0" />
+            <element signature="e#3772#3975#0" />
+            <element signature="e#4131#4745#0" />
+            <element signature="e#4352#4475#0" />
+            <element signature="e#4769#7077#0" />
+            <element signature="e#4819#7077#0" />
+            <element signature="e#5147#7077#0" />
+            <element signature="e#5220#5328#0" />
+            <element signature="e#6044#6225#0" />
+            <element signature="e#6276#6444#0" />
+            <element signature="e#7129#7445#0" />
+          </folding>
+        </state>
+      </provider>
     </entry>
   </component>
 </project>
