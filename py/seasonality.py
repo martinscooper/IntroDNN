@@ -67,15 +67,16 @@ print(c[np.argmin(c)])
 
 
 from pandas.plotting import autocorrelation_plot
-dfu = get_user_data(df, 50).droplevel(0)
 
-#dfu = dfu.loc[:, 'slevel']
+dfu = get_user_data(df, 32).droplevel(0).loc[:,'slevel']
 idx = pd.date_range('2013-03-27 04:00:00', '2013-06-01 3:00:00', freq='h')
 d = pd.DataFrame(index=idx)
-d['slevel'] = dfu.slevel
+d['slevel'] = dfu
 d.isna().sum()
 d.ffill(inplace=True)
-# Draw Plot
+
+
+# Autocorrelation Plot
 plt.close()
 plt.rcParams.update({'figure.figsize':(9,5), 'figure.dpi':120})
 autocorrelation_plot(dfu.slevel)
